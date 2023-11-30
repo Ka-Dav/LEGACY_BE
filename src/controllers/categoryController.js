@@ -42,8 +42,10 @@ export const getCategoryById = async (req, res) => {
 
 export const editCategory = async (req, res) => {
   const id = req.params.id;
+  const data = req.body;
   try {
     const category = await CategoryModel.findOne({ _id: id });
+    await category.updateOne(data);
     res.send({ status: 'success', data: category });
   } catch (err) {
     res.status(500).send({ status: 'error', message: err });

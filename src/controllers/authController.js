@@ -9,6 +9,7 @@ export const login = async (req, res) => {
   try {
     const user = await userModel.findOne({ email: email });
     if (user && (await comparePassword(password, user.password))) {
+      await user.updateOne({ lastLoggedIn: Date.now() });
       const payload = { id: user._id, role: user.role };
       const token = generateToken(payload);
       res.send({ status: 'success', data: { token: token } });

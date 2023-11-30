@@ -1,7 +1,6 @@
 import { uploadImage } from '../services/cloudinaryService.js';
 
-const imageUploader = async (req,res,next) => {
-  console.log(req.file);
+const imageUploader = async (req, res, next) => {
   if (req.file) {
     const file = req.file;
     const folder = req.baseUrl.split('/')[1];
@@ -20,8 +19,6 @@ const imageUploader = async (req,res,next) => {
     req.body.image = '';
     next();
   }
-  
-  
-}
+};
 
 export default imageUploader

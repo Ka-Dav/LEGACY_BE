@@ -14,10 +14,12 @@ const drugSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  categories: {
-    type: [Schema.Types.ObjectId],
-    ref: Category,
-  },
+  categories: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: 'Category',
+    },
+  ],
   formula: {
     type: String,
     required: true,

@@ -11,6 +11,7 @@ router.post(
   '/',
   authCheck,
   adminCheck,
+  multerUploads,
   imageUploader,
   drugValidation,
   drugController.addDrug
@@ -21,7 +22,7 @@ router.get('/', drugController.getAllDrugs);
 router.get('/:id', drugController.getDrugById);
 
 router.post(
-  '/:id/assignCategory',
+  '/:id/assigncat',
   authCheck,
   adminCheck,
   drugController.assignCategory
