@@ -4,10 +4,11 @@ import {
   authValidation,
 } from '../middleware/dataValidation.js';
 import { login, register } from '../controllers/authController.js';
+import { authCheck } from '../middleware/authChecker.js';
 
 const router = express.Router();
 
-router.post('/login',authValidation, login);
+router.post('/login', authValidation, login);
 
 router.post('/register', userValidation, register);
 

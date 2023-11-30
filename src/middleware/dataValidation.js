@@ -18,7 +18,7 @@ const adminSchema = Joi.object({
 
 const drugSchema = Joi.object({
   name: Joi.string().required().min(3),
-  category: Joi.string().required().min(3),
+  categories: Joi.string().required().min(3),
   image: Joi.string(),
   description: Joi.string().required().min(3),
   formula: Joi.string().required().min(3),
@@ -27,10 +27,18 @@ const drugSchema = Joi.object({
   usage: Joi.string().required().min(3),
 });
 
-export const  userValidation = (req,res,next) => { 
-	const { error } = userSchema.validate(req.body);
+const categorySchema = Joi.object({
+  name: Joi.string().required().min(3),
+  description: Joi.string().min(3),
+});
+
+export const userValidation = (req, res, next) => {
+  const { error } = userSchema.validate(req.body);
   if (error) {
-     res.status(406).send({status:"error", message:`Error in User Data : ${error.message}`})
+    res.status(406).send({
+      status: 'error',
+      message: `Error in User Data : ${error.message}`,
+    });
   } else {
     next();
   }
@@ -39,12 +47,10 @@ export const  userValidation = (req,res,next) => {
 export const authValidation = (req, res, next) => {
   const { error } = authSchema.validate(req.body);
   if (error) {
-    res
-      .status(406)
-      .send({
-        status: 'error',
-        message: `Error in User Data : ${error.message}`,
-      });
+    res.status(406).send({
+      status: 'error',
+      message: `Error in User Data : ${error.message}`,
+    });
   } else {
     next();
   }
@@ -53,12 +59,10 @@ export const authValidation = (req, res, next) => {
 export const adminValidation = (req, res, next) => {
   const { error } = adminSchema.validate(req.body);
   if (error) {
-    res
-      .status(406)
-      .send({
-        status: 'error',
-        message: `Error in User Data : ${error.message}`,
-      });
+    res.status(406).send({
+      status: 'error',
+      message: `Error in User Data : ${error.message}`,
+    });
   } else {
     next();
   }
@@ -67,12 +71,22 @@ export const adminValidation = (req, res, next) => {
 export const drugValidation = (req, res, next) => {
   const { error } = drugSchema.validate(req.body);
   if (error) {
-    res
-      .status(406)
-      .send({
-        status: 'error',
-        message: `Error in User Data : ${error.message}`,
-      });
+    res.status(406).send({
+      status: 'error',
+      message: `Error in User Data : ${error.message}`,
+    });
+  } else {
+    next();
+  }
+};
+
+export const categoryValidation = (req, res, next) => {
+  const { error } = categorySchema.validate(req.body);
+  if (error) {
+    res.status(406).send({
+      status: 'error',
+      message: `Error in User Data : ${error.message}`,
+    });
   } else {
     next();
   }

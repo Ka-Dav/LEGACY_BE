@@ -1,5 +1,5 @@
 import mongoose, { Schema } from 'mongoose';
-import Category from './category';
+import Category from './category.js';
 
 const drugSchema = new mongoose.Schema({
   _id: Schema.Types.ObjectId,
@@ -14,8 +14,8 @@ const drugSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  category: {
-    type: ,
+  categories: {
+    type: [Schema.Types.ObjectId],
     ref: Category,
   },
   formula: {

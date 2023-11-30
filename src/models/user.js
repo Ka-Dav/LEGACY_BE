@@ -9,9 +9,9 @@ const userSchema = new mongoose.Schema({
   img: {
     type: String,
   },
-  gender:{
+  gender: {
     type: String,
-    enum:['male','female'],
+    enum: ['male', 'female'],
   },
   password: {
     type: String,
@@ -24,6 +24,10 @@ const userSchema = new mongoose.Schema({
   created: {
     type: Date,
     default: Date.now,
+  },
+  role: {
+    type: String,
+    enum: ['user', 'admin'],
   },
   lastLoggedIn: {
     type: Date,
