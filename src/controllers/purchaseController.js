@@ -20,16 +20,21 @@ export const addPurchase = async (req, res) => {
 };
 
 export const getAllPurchases = async (req, res) => {
-  const { user } = req.query;
+  const { user, date } = req.query;
   try {
     if (user) {
-      const drugs = await PurchaseModel.find({ categories: cat }).populate(
-        'categories'
-      );
-      res.send({ status: 'success', data: drugs });
-    } else {
-      const drugs = await PurchaseModel.find({}).populate('categories');
-      res.send({ status: 'success', data: drugs });
+      const purchases = await PurchaseModel.find({user:user}).populate(['user', 'drug']);
+      res.send({ status: 'success', data: purchases });
+    } 
+    else if (date) {
+      const purchases = await PurchaseModel.find({ date:date }).populate([
+        'user',
+        'drug',
+        ]);
+        res.send({ status: 'success', data: purchases });
+    }else {
+      const purchases = await PurchaseModel.find({}).populate(['user', 'drug']);
+      res.send({ status: 'success', data: purchases });
     }
   } catch (err) {
     res.status(500).send({ status: 'error', message: err });
