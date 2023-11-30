@@ -5,6 +5,7 @@ const userSchema = Joi.object({
   img: Joi.string(),
   password: Joi.string().required().min(8),
   email: Joi.string().email().required(),
+  gender: Joi.string().required(3),
 });
 
 const authSchema= Joi.object({

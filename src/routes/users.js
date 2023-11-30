@@ -1,12 +1,17 @@
 import express from 'express';
-import { drugValidation } from '../middleware/dataValidation.js';
 import * as userController from '../controllers/userController.js';
-import { adminCheck, authCheck } from './../middleware/authChecker.js';
+import {
+  adminCheck,
+  authCheck,
+  userCheck,
+} from './../middleware/authChecker.js';
 
 const router = express.Router();
 
-router.get('/', userController.getAllUsers);
+router.get('/all', authCheck, adminCheck, userController.getAllUsers);
 
-router.get('/:id', userController.getUserById);
+router.get('/:id', authCheck, adminCheck, userController.getUserById);
+
+router.get('/', authCheck, userController.getUser);
 
 export default router;

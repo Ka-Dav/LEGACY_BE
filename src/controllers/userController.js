@@ -68,3 +68,13 @@ export const assignCategory = async (req, res) => {
     res.status(500).send({ status: 'error', message: err });
   }
 };
+
+export const getUser = async (req, res) => {
+  const id = req.user.id;
+  try {
+    const user = await userModel.findOne({ _id: id });
+    res.send({ status: 'success', data: user });
+  } catch (err) {
+    res.status(500).send({ status: 'error', message: err });
+  }
+};

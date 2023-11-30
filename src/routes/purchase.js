@@ -1,12 +1,17 @@
 import express from 'express';
-import { drugValidation } from '../middleware/dataValidation.js';
-import * as userController from '../controllers/userController.js';
-import { adminCheck, authCheck } from './../middleware/authChecker.js';
+import * as purchaseController from '../controllers/purchaseController.js';
+import {
+  adminCheck,
+  authCheck,
+  userCheck,
+} from './../middleware/authChecker.js';
 
 const router = express.Router();
 
-router.get('/', userController.getAllUsers);
+router.post('/', authCheck, userCheck, purchaseController.addPurchase);
 
-router.get('/:id', userController.getUserById);
+router.get('/all', authCheck, adminCheck, purchaseController.getAllPurchases);
+
+router.get('/', authCheck, userCheck, purchaseController.getPurchases);
 
 export default router;
